@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/*===============================
+	Visible
+================================*/
+
+.sp_parts, .show_sp_only {
+	display: none;
+	@include l { display: none; }
+	@include m { display: none; }
+	@include s { display: block; }
+}
+.tb_parts, .show_tb_only {
+	display: none;
+	@include l { display: none; }
+	@include m { display: block; }
+	@include s { display: none; }
+}
+.pc_parts, .show_pc_only {
+	display: block;
+	@include l { display: block; }
+	@include m { display: none; }
+	@include s { display: none; }
+}
+
+.none_sp_parts, .hide_sp_only {
+	display: block;
+	@include l { display: block; }
+	@include m { display: block; }
+	@include s { display: none; }
+}
+.none_tb_parts, .hide_tb_only {
+	display: block;
+	@include l { display: block; }
+	@include m { display: none; }
+	@include s { display: block; }
+}
+.none_pc_parts, .hide_pc_only {
+	display: none;
+	@include l { display: none; }
+	@include m { display: block; }
+	@include s { display: block; }
+}

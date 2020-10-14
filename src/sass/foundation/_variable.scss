@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/*===============================
+	Variable
+================================*/
+
+// global
+$global-font-size     : 16;
+$global-lineheight    : 1.6;
+$global-width         : 960px;
+$global-narrow-width  : 840px;
+$global-max-width     : 1000px;
+$global-max-image-width : 1800px;
+$global-weight-normal : normal;
+$global-weight-bold   : bold;
+
+// color
+$color-black: #434343;
+$color-gray: #eaeaea;
+$color-gray2: #bfbfbf;
+$color-gray3: #c9c9c9;
+$color-gray4: #e9e9e9;
+$color-gray6: #f3f3f3;
+$color-gray7: #828282;
+$color-gray5: #eee;
+$color-white: #fff;
+
+$color-key     : #333;
+$color-key2     : #111;
+$color-brand     : #333;
+
+// body
+$body-background: $color-white;
+$body-font-color: $color-black;
+$body-font-family: -apple-system, BlinkMacSystemFont, Hiragino Kaku Gothic ProN,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro", "Helvetica Neue", Verdana, Meiryo, "M+ 1p", sans-serif;
+$body-font-family-ms: "メイリオ",Meiryo,"游ゴシック",YuGothic,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+
+// breakpoints
+$small-width   : 0;
+$medium-width  : 640px;
+$large-width   : 960px;
+
+// grid
+$grid-row-width: $global-width;
+$grid-column-count: 12;
+$grid-column-gutter: (
+  small: 20px,
+  medium: 30px,
+);

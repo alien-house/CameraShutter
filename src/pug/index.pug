@@ -1,0 +1,29 @@
+//- index.pug
+//- テンプレート埋め込み
+extend ./_inc/_layout
+
+//- ページ独自の設定
+append pageData
+  -
+    var pageTitle = "Pixi.jsでカメラシャッターアニメーションスライドショー";
+    var pageDesc = "Pixi.jsでカメラシャッターアニメーションスライドショー";
+    var keyWord = "Pixi.js,カメラシャッター,アニメーション,スライドショー";
+    var unique = 'top';
+    var isUniqueStyle = false;
+
+block main
+
+  #canvas
+
+  style.
+    html,body {
+      margin: 0;
+    }
+    #canvas {
+      width: 100%;
+      height: 100vh;
+      overflow:hidden;
+      position: relative;
+    }
+
+

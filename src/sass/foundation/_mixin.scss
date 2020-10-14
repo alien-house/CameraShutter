@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+/*===============================
+	Mixin
+================================*/
+
+// vwを使う際のrate出力関数
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@function get_vw($size, $viewport:375){
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
+}
+
+// rem, vwへ換算する関数
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@function rem($px-size) {
+  @return $px-size / $global-font-size * 1rem;
+}
+@function vw($px-size, $viewport:375) {
+  $rate: 100 / $viewport;
+  @return $rate * $px-size * 1vw;
+}
+
+// breakpoint
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+
+// 「@include sm {}」と「@include sm-only {}」は適用範囲は同じ。
+
+// ~ 640px
+@mixin s {
+  @media screen and (max-width: $medium-width) { @content; }
+}
+
+// ～960
+@mixin m {
+  @media screen and (max-width: $large-width) { @content; }
+}
+
+// ～1200
+@mixin l {
+  @media screen and (max-width: $global-max-width ) { @content; }
+}
+
+
+// 641px 以上
+@mixin s-up {
+  @media screen and (min-width: $medium-width + 1) { @content; }
+}
+// 961px 以上
+@mixin m-up {
+  @media screen and (min-width: $large-width + 1) { @content; }
+}
+// // 1201px 以上
+@mixin l-up {
+  @media screen and (min-width: $global-max-width + 1) { @content; }
+}
+
+//pc:hover
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@mixin hover {
+  @include lg { &:hover { @content; } }
+}
+
+// margin center
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@mixin margin-x { margin-left:auto; margin-right:auto; }
+@mixin margin-y { margin-top:auto; margin-bottom:auto; }
+
+// absolute center
+@mixin absolute-x { @include margin-x; position:absolute; right:0; left:0; }
+@mixin absolute-y { @include margin-y; position:absolute; top:0; bottom:0; }
+@mixin absolute-xy { margin:auto; position:absolute; top:0; bottom:0; right:0; left:0; }
+
+//clearfix
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@mixin clearfix { zoom:1;
+  &:before,&:after { content:''; display:table; width:0; height:0; }
+  &:after { clear:both; }
+}
+
+// font-size
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@mixin font-size($font-size){
+  font-size: $font-size / $global-font-size + rem;
+  font-size: get_vw($font-size);
+  @include s { font-size: vw($font-size); }
+  @include m { font-size: vw($font-size, 768); }
+  @include l { font-size: $font-size * 1px;}
+}
+
+// place holder
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+@mixin placeholderColor($color) {
+    &:placeholder-shown {
+        color: $color;
+        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, helvetica, sans-serif;
+    }
+    &::-webkit-input-placeholder {
+        color:$color;
+        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, helvetica, sans-serif;
+    }
+    &:-moz-placeholder {
+        color:$color;
+        opacity: 1;
+        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, helvetica, sans-serif;
+    }
+    &::-moz-placeholder {
+        color:$color;
+        opacity: 1;
+        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, helvetica, sans-serif;
+    }
+    &:-ms-input-placeholder {
+        color:$color;
+        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, helvetica, sans-serif;
+    }
+}
+

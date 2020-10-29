@@ -15,27 +15,27 @@ export default class Slideshow {
     this.data = [
       {
         "name": "slide01",
-        "url": "/assets/images/slideshow/img01.jpg"
+        "url": "./assets/images/slideshow/img01.jpg"
       },
       {
         "name": "slide02",
-        "url": "/assets/images/slideshow/img02.jpg"
+        "url": "./assets/images/slideshow/img02.jpg"
       },
       {
         "name": "slide03",
-        "url": "/assets/images/slideshow/img03.jpg"
+        "url": "./assets/images/slideshow/img03.jpg"
       },
       {
         "name": "slide04",
-        "url": "/assets/images/slideshow/img04.jpg"
+        "url": "./assets/images/slideshow/img04.jpg"
       },
       {
         "name": "slide05",
-        "url": "/assets/images/slideshow/img05.jpg"
+        "url": "./assets/images/slideshow/img05.jpg"
       },
       {
         "name": "slide06",
-        "url": "/assets/images/slideshow/img06.jpg"
+        "url": "./assets/images/slideshow/img06.jpg"
       },
     ];
   }
@@ -83,15 +83,6 @@ export default class Slideshow {
   }
 
 
-  viewChanged() {
-    if (document.hidden) {
-        this.hidden();
-    } else {
-        this.visible();
-    }
-  }
-
-
   build() {
     let slideContainer = new PIXI.Container();
     const verticesX = this.app.screen.width / 2;
@@ -115,7 +106,6 @@ export default class Slideshow {
       this.imgratio = slide.height / slide.width;
       this.cover_ratio = slide.width / slide.height;
       slideWrap.alpha = 0;
-      slide.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 
       slideWrap.addChild(this.zoomContainer);
       slideContainer.addChild(slideWrap);
@@ -123,18 +113,6 @@ export default class Slideshow {
 
     this.container.addChild(slideContainer);
     this.shutter.init(this.container);
-    this.firstExpression();
-  }
-
-  hidden() {
-    this.cNum = 0;
-    this.slideWrapBoxes.forEach( (slide) => {
-      slide.alpha = 0;
-    });
-    clearInterval(this.setIntervalID);
-  }
-
-  visible() {
     this.firstExpression();
   }
 
@@ -157,7 +135,6 @@ export default class Slideshow {
   //スライドショースタート
   slideshowStart() {
     this.setIntervalID = setInterval( () => {
-
       this.shutter.shutterStart({
         onComplete : () => {
           this.slideWrapBoxes[this.cNum].alpha = 0;
@@ -170,7 +147,6 @@ export default class Slideshow {
           this.zooming();
         }
       });
-
     }, this.ssInterval);
 
   }
@@ -199,6 +175,27 @@ export default class Slideshow {
 
   }
 
+
+
+  viewChanged() {
+    if (document.hidden) {
+        this.hidden();
+    } else {
+        this.visible();
+    }
+  }
+
+  hidden() {
+    this.cNum = 0;
+    this.slideWrapBoxes.forEach( (slide) => {
+      slide.alpha = 0;
+    });
+    clearInterval(this.setIntervalID);
+  }
+
+  visible() {
+    this.firstExpression();
+  }
 
 
 }

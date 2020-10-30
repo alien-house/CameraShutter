@@ -1,0 +1,4 @@
+{
+    "plugins": ["transform-inline-environment-variables"],
+    "presets": ["@babel/preset-env"] 
+}

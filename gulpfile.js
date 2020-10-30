@@ -9,7 +9,6 @@ const buffer = require('vinyl-buffer');
 const babelify = require('babelify');
 const pug = require('gulp-pug');
 const del = require("del");
-const argv = require('yargs').argv;
 
 const app = './src/';
 const distpath = './dist/';
@@ -45,9 +44,6 @@ const browserReload = (done) => {
   done();
 };
 
-
-
-
 const jsbuild = () => browserify({ debug: true })
   .add( [paths.scripts.src] )
   .on("error", function (err) { console.log("Error : " + err.message); })
@@ -69,15 +65,7 @@ const pugbuild = () => src(paths.html.src)
   .pipe(dest( paths.html.dest ) )
   .pipe(browserSync.stream());
 
-
-const otherbuild = () => src([
-  'src/json/**',
-], { base: 'src' }, { since: lastRun(otherbuild) })
-.pipe(dest(paths.dist));
-
-
 const clean = () => del([ paths.dist ]);
-
 
 const watchTask = (done) => {
   watch(paths.scripts.watch, series(jsbuild, browserReload))
@@ -85,8 +73,8 @@ const watchTask = (done) => {
   done();
 }
 
-exports.build = series(clean, parallel(jsbuild, pugbuild, otherbuild));
+exports.build = series(clean, parallel(jsbuild, pugbuild));
 
 exports.default = series(
-  parallel(jsbuild, pugbuild, otherbuild), watchTask, browsersync
+  parallel(jsbuild, pugbuild), watchTask, browsersync
 );
